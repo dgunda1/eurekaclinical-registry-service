@@ -1,4 +1,4 @@
-package org.eurekaclinical.registry.service.dao;
+package org.eurekaclinical.registry.service.resource;
 
 /*-
  * #%L
@@ -20,17 +20,24 @@ package org.eurekaclinical.registry.service.dao;
  * #L%
  */
 
-import java.util.List;
-import org.eurekaclinical.registry.service.entity.UserEntity;
-import org.eurekaclinical.standardapis.dao.Dao;
+import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
+
 
 /**
  *
  * @author Dileep Gunda
  */
-public interface UserDao <U extends UserEntity> extends Dao<U, Long> {
+class Perm {
+	AuthorizedUserEntity owner;
+	boolean read;
+	boolean write;
+	boolean execute;
 
-    U getUsersByName(String name);
-	
-	List<U> getUsersForGroup(String username);
+	Perm(AuthorizedUserEntity owner, boolean read, boolean write, boolean execute) {
+		this.owner = owner;
+		this.read = read;
+		this.write = write;
+		this.execute = execute;
+	}
+    
 }

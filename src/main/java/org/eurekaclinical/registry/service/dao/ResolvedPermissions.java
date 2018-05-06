@@ -20,17 +20,33 @@ package org.eurekaclinical.registry.service.dao;
  * #L%
  */
 
-import java.util.List;
-import org.eurekaclinical.registry.service.entity.UserEntity;
-import org.eurekaclinical.standardapis.dao.Dao;
 
 /**
  *
  * @author Dileep Gunda
  */
-public interface UserDao <U extends UserEntity> extends Dao<U, Long> {
-
-    U getUsersByName(String name);
+public class ResolvedPermissions {
+	private final boolean groupRead;
+	private final boolean groupWrite;
+	private final boolean groupExecute;
 	
-	List<U> getUsersForGroup(String username);
+	public ResolvedPermissions(boolean groupRead, boolean groupWrite, boolean groupExecute) {
+		this.groupRead = groupRead;
+		this.groupWrite = groupWrite;
+		this.groupExecute = groupExecute;
+	}
+
+	public boolean isGroupRead() {
+		return groupRead;
+	}
+
+	public boolean isGroupWrite() {
+		return groupWrite;
+	}
+
+	public boolean isGroupExecute() {
+		return groupExecute;
+	}
+	
+	
 }

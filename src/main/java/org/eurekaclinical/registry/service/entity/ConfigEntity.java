@@ -1,4 +1,4 @@
-package org.eurekaclinical.registry.service.dao;
+package org.eurekaclinical.registry.service.entity;
 
 /*-
  * #%L
@@ -20,17 +20,19 @@ package org.eurekaclinical.registry.service.dao;
  * #L%
  */
 
-import java.util.List;
-import org.eurekaclinical.registry.service.entity.UserEntity;
-import org.eurekaclinical.standardapis.dao.Dao;
+
 
 /**
  *
  * @author Dileep Gunda
  */
-public interface UserDao <U extends UserEntity> extends Dao<U, Long> {
+public interface ConfigEntity {
 
-    U getUsersByName(String name);
+	public abstract String getName();
 	
-	List<U> getUsersForGroup(String username);
+	public abstract void setName(String name);
+	
+	public abstract AuthorizedUserEntity getOwner();
+	
+	public abstract void setOwner(AuthorizedUserEntity owner);
 }
