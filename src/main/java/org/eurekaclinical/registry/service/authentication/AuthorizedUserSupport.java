@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  *
- * @author Andrew Post
+ * @author Dileep Gunda
  */
 public class AuthorizedUserSupport extends AbstractUserSupport {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizedUserSupport.class);
