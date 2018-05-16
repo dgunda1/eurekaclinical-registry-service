@@ -173,7 +173,7 @@ public class GroupEntity implements org.eurekaclinical.standardapis.entity.Group
 	}
 
 	public void addComponents(ComponentEntity inComponents) {
-		if (this.components.contains(inComponents)) {
+		if (!this.components.contains(inComponents)) {
 			this.components.add(inComponents);
 		}
 	}
