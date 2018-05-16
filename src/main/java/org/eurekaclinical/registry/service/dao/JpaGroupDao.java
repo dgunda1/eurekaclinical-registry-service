@@ -30,11 +30,5 @@ public class JpaGroupDao extends AbstractJpaGroupDao<GroupEntity> implements Gro
         super(GroupEntity.class, inEMProvider);
     }
 
-	@Override
-	public ResolvedPermissions resolveGroupConfigPermissions(AuthorizedUserEntity etlUser, GroupConfigEntity entity) {
-		// TODO Auto-generated method stub
-		//return null;
-		return new ResolvedPermissions(false, false, false);
-	}
 
 }
