@@ -4,7 +4,7 @@ import org.eurekaclinical.registry.client.comm.GroupConfig;
 import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
 import org.eurekaclinical.registry.service.entity.ConfigEntity; 
 import org.eurekaclinical.registry.service.dao.GroupDao;
-import org.eurekaclinical.registry.service.dao.SourceConfigDao;
+import org.eurekaclinical.registry.service.dao.GroupConfigDao;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +19,16 @@ public class GroupConfigs {
 	
 	private final GroupDao groupDao; 
 	private final AuthorizedUserEntity groupUser;
-//	private final ConfigDao configDao;
+	private final GroupConfigDao configDao;
 	private final ConfigsDTOExtractor extractor;
 
 	//GroupConfigs(EtlProperties inEtlProperties, AuthorizedUserEntity inEtlUser, SourceConfigDao inSourceConfigDao, GroupDao inGroupDao) {
-	GroupConfigs( AuthorizedUserEntity inGroupUser,  GroupDao inGroupDao) {
+	GroupConfigs( AuthorizedUserEntity inGroupUser,  GroupConfigDao inGroupConfigDao, GroupDao inGroupDao) {
 		try {
 			 
 			this.groupDao = inGroupDao;
 			this.groupUser = inGroupUser;
+			this.configDao = inGroupConfigDao;
 			this.extractor = new ConfigsDTOExtractor(this.groupUser);
 		} catch (IOException ex) {
 			throw new HttpStatusException(Response.Status.INTERNAL_SERVER_ERROR,
@@ -47,7 +48,7 @@ public class GroupConfigs {
 			throw new IllegalArgumentException("configId cannot be null");
 		}
 
-		return extractor.extractDTO(this.ConfigDao.getByName(configId));
+		return (GroupConfig) extractor.extractDTO(this.configDao.getByName(configId));
 	}
 
 	/**
@@ -57,8 +58,8 @@ public class GroupConfigs {
 	 */
 	public final List<GroupConfig> getAll() {
 		List<GroupConfig> result = new ArrayList<>();
-		for (ConfigEntity configEntity : this.ConfigDao.getAll()) {
-			GroupConfig dto = extractor.extractDTO(configEntity);
+		for (ConfigEntity configEntity : this.configDao.getAll()) {
+			GroupConfig dto = (GroupConfig) extractor.extractDTO(configEntity);
 			if (dto != null) {
 				result.add(dto);
 			}
