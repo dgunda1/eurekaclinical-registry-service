@@ -29,6 +29,7 @@ import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
 import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
 import org.eurekaclinical.standardapis.dao.AbstractJpaUserTemplateDao;
+import org.eurekaclinical.standardapis.entity.RoleEntity;
 import org.eurekaclinical.standardapis.entity.UserEntity;
 import org.eurekaclinical.registry.service.entity.UserTemplateEntity_;
 

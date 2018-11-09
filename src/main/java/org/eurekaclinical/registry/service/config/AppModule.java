@@ -34,28 +34,33 @@ import org.eurekaclinical.registry.service.dao.RegistryServiceRoleDao;
 import org.eurekaclinical.registry.service.entity.ComponentEntity;
 import org.eurekaclinical.registry.service.entity.ComponentTypeEntity;
 import org.eurekaclinical.registry.service.entity.AuthorizedRoleEntity;
-import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity;
-import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
+import org.eurekaclinical.registry.service.entity.AuthorizedUserEntity; 
 import org.eurekaclinical.registry.service.entity.GroupEntity;
+import org.eurekaclinical.registry.service.entity.UserTemplateEntity;
 import org.eurekaclinical.standardapis.dao.GroupDao;
 import org.eurekaclinical.standardapis.dao.RoleDao;
 import org.eurekaclinical.standardapis.dao.UserDao;
 import org.eurekaclinical.standardapis.dao.UserTemplateDao;
+import org.eurekaclinical.standardapis.entity.RoleEntity;
+import org.eurekaclinical.standardapis.entity.UserEntity;
 
 /**
  * Created by akalsan on 10/4/16.
  */
 public class AppModule extends AbstractModule {
 
+
     @Override
     protected void configure() {
         bind(RegistryServiceRoleDao.class).to(JpaRoleDao.class);
         bind(new TypeLiteral<UserDao<AuthorizedUserEntity>>() {}).to(JpaUserDao.class);
-        bind(new TypeLiteral<UserDao<? extends org.eurekaclinical.standardapis.entity.UserEntity<? extends org.eurekaclinical.standardapis.entity.RoleEntity>>>() {}).to(JpaUserDao.class);
+        bind(new TypeLiteral<UserDao<? extends UserEntity<? extends RoleEntity>>>() {}).to(JpaUserDao.class);
         bind(new TypeLiteral<UserTemplateDao<AuthorizedRoleEntity,UserTemplateEntity>>() {}).to(JpaUserTemplateDao.class);
         bind(new TypeLiteral<RoleDao<AuthorizedRoleEntity>>() {}).to(JpaRoleDao.class);
         bind(new TypeLiteral<ComponentDao<ComponentEntity>>() {}).to(JpaComponentDao.class);
         bind(new TypeLiteral<ComponentTypeDao<ComponentTypeEntity>>() {}).to(JpaComponentTypeDao.class);
         bind(new TypeLiteral<GroupDao<GroupEntity>>() {}).to(JpaGroupDao.class);
+        bind(new TypeLiteral<UserTemplateDao<? extends RoleEntity,? extends org.eurekaclinical.standardapis.entity.UserTemplateEntity<? extends RoleEntity >>>() {}).to(JpaUserTemplateDao.class);
+        
     }
 }
